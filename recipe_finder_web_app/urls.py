@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('recipe_finder.urls')),
+    path('admin/', admin.site.urls),  # Admin interface
+    path('', include('recipe_finder.urls')),  # Include app URLs under root path
 ]
