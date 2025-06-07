@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Finder</title>
+    <link rel="stylesheet" href="{% static 'recipe_finder/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Recipe Finder</h1>
+        <nav>
+            <a href="/">
+                <h2>Your Pantry</h2>
+            </a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="pantry">
+            <!-- Add Pantry Item -->
+            <form method="get">
+                <input type="text" name="pantry_item" placeholder="Add pantry ingredient (hit 'enter' key to add)" required>
+                <input type="hidden" name="action" value="add">
+            </form>
+            
+            <!-- Search Button -->
+            {% if pantry_items %}
+                <form method="get">
+                    <input type="hidden" name="action" value="search">
+                    <button type="submit">Search Recipes with Pantry</button>
+                </form>
+            {% endif %}
+
+            <!-- Pantry List -->
+            <ul class="pantry-list">
+                <h3>Pantry Items:</h3>
+                {% for item in pantry_items %}
+                    <li>
+                        {{ item.name }}
+                        <form method="get" style="display:inline">
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <input type="hidden" name="action" value="delete">
+                            <button id="pantry-delete-button" type="submit" style="color:red">x</button>
+                        </form>
+                    </li>
+                {% empty %}
+                    <li>Your pantry is empty.</li>
+                {% endfor %}
+            </ul>
+
+        </section>
+    </main>
+</body>
+</html>

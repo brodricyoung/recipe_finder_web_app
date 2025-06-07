@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Results</title>
+    <link rel="stylesheet" href="{% static 'recipe_finder/styles.css' %}">
+</head>
+<body>
+
+    <header>
+        <h1>Recipe Finder</h1>
+        <nav>
+            <a href="/">
+                <h2>Your Pantry</h2>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 id="results">Recipes for: "{{ ingredients }}"</h2>
+
+        {% if recipes %}
+            <div class="card-container">
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h3>{{ recipe.name }}</h3>
+                    {% if recipe.image_url %}
+                        <img src="{{ recipe.image_url }}" alt="{{ recipe.name }}">
+                    {% endif %}
+                    <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+                    {% if recipe.instructions %}
+                            <details>
+                                <summary><strong>Show Instructions</strong></summary>
+                                <p>{{ recipe.instructions|safe }}</p>
+                            </details>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p>No recipes found for the given ingredients.</p>
+        {% endif %}
+    </main>
+
+</body>
+</html>
