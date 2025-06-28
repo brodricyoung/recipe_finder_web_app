@@ -1,7 +1,7 @@
 import requests
 from recipe_finder.models import Recipe
 
-API_KEY = "73ec19e9f63344b6beb1c232d6bc0a2a"  # Spoonacular API key (replace with your own)
+API_KEY = ""  # Spoonacular API key (replace with your own)
 
 def run():
     url = f"https://api.spoonacular.com/recipes/random"
